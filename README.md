@@ -24,3 +24,8 @@
     - `>> activate scexe`
 3. **Install** Packages Into Environment (Needed First Time, or some changes happened)
     - `>> (scexe) pip install -r requirements.txt`
+
+## Author
+
+github@KBJIYU 
+March, 2019
