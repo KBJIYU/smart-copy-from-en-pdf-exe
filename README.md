@@ -5,8 +5,10 @@
 **Do you ever have trouble with copying English article or thesis graphs without tidy format?** 
 > **NO MORE ADJUSTING AND FORMATTING BY HAND!! 📢 **
 
-- Only Need 1 steps here!
-  1. **ctrl+c** dirty-text. -> that's ALL!.
+- Only Need 3 steps here!
+  1. Execute with ``[cmd] python ./smartcopy.py``.
+  2. Do ``ctrl+c`` with some english dirty-text.
+  3. Check tidy-version with ``ctrl+v``!
 
 ## Develop Information 🚩
 
