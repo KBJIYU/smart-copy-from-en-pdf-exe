@@ -1,0 +1,7 @@
+certifi==2019.3.9
+nltk==3.4
+pypiwin32==223
+pywin32==224
+singledispatch==3.4.0.3
+six==1.12.0
+wincertstore==0.2
