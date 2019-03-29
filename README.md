@@ -1,6 +1,6 @@
 # smart-copy-from-en-pdf-exe
 
-![smartcopy-logo](/smartcopy.png)
+![smartcopy-logo](/logo.png)
 
 ## About This Project 🚀👑 🎈
 
