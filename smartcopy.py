@@ -112,34 +112,36 @@ def smartcopy_runner(modifytext_func, **modifytext_kwargs):
 
 
 def opening_msg():
-    print("\n===================================================\n")
+    print("\n==============================================================\n")
     print(
-        """ WELCOME TO SMARTCOPY v1.1.0 ^_^
+        """    WELCOME TO SMARTCOPY v1.1.0 ^_^
+    歡迎使用 SMARTCOPY !
+    希望這項小工具能提升您的工作效率!
     -------------------------------
     > Author: github@kbjiyu
     > Github: https://goo.gl/Pnkazc
     ------------------------------- """)
-    print("\n===================================================")
 
 
 def input_question():
     while True:
+        print("\n==============================================================")
         # questions for params
         try:
-            modify_mode_num = int(input(
-                "Please select the 'modify mode'(default is 1): \n  1 basic\n  2 list-mark\n  Your Selection >> "))
+            print("請選擇文章輸出模式 Please select the 'modify mode'(default is 1): \n  1 基本 basic\n  2 列表式 list-mark\n  輸入你的選擇(數字)後按下Enter Your Selection: ")
+            modify_mode_num = int(input(">_ "))
         except ValueError:
-            print("Warning! Please enter with the limited number.")
+            print("警告! 請輸入選項之對應數字! Warning! Please enter with the limited number.")
         else:
             break
 
     while True:
+        print("\n==============================================================")
         try:
-            print("===================================================")
-            keep_emoji_num = int(input(
-                "Please select the 'keep_emoji' option(default is 1): \n  1 keep it!\n  2 remove it\n  Your Selection >> "))
+            print("請選擇是否清洗文章內emoji符號 Please select the 'keep_emoji' option(default is 1): \n  1 保存 keep it!\n  2 清洗 remove it\n  輸入你的選擇(數字)後按下Enter Your Selection: ")
+            keep_emoji_num = int(input(">_ "))
         except ValueError:
-            print("Warning! Please enter with the limited number.")
+            print("警告! 請輸入選項之對應數字! Warning! Please enter with the limited number.")
         else:
             break
 
@@ -153,9 +155,9 @@ def input_question():
     else:
         keep_emoji = False
 
-    print("===================================================")
+    print("==============================================================")
     print("> modify_mode: {}\n> keep_emoji: {}".format(modify_mode, keep_emoji))
-    print("===================================================")
+    print("==============================================================")
 
     return modify_mode, keep_emoji
 
