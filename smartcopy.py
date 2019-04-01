@@ -3,101 +3,189 @@
 ######################
 ### SMART COPY      ##
 ### AUTHOR: KBJIYU  ##
-### VERSION: v1.0.0 ##
+### VERSION: v1.1.0 ##
 ######################
 
-import re
 import sys
 import time
-import py3compat
+import logging
 import win32clipboard
 
+from modifytext import modify_en_text
 
-def split_sentence_by_br(text):
-    def purify_text(text):
-        """ Remove emoji. """
-        emoji_pattern = re.compile("["
-                                   u"\U0001F600-\U0001F64F"  # emoticons
-                                   u"\U0001F300-\U0001F5FF"  # symbols & pictographs
-                                   u"\U0001F680-\U0001F6FF"  # transport & map symbols
-                                   u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
-                                   "]+", flags=re.UNICODE)
-
-        return emoji_pattern.sub(r'', text)
-
-    text_output = ""
-
-    text = purify_text(text)
-    sents = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', text)
-    # sents = nltk.sent_tokenize(text) # can't fix the pyinstaller problem with it.
-
-    for _s in sents:
-        s = ' '.join(_s.split(), )
-        text_output += s + "\n\n"
-
-    return text_output
+logging.basicConfig(level=logging.DEBUG,
+                    format='[%(asctime)s][%(levelname)s]: %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S')
 
 
-def spy_on_clipboard(modify_func):
-    """ Loops in spying clipboard's action, then modify  """
-    def get_clipboard_text():
-        win32clipboard.OpenClipboard()
-        try:
-            text = win32clipboard.GetClipboardData(
-                win32clipboard.CF_UNICODETEXT)
-        except (TypeError, win32clipboard.error):
-            try:
-                text = win32clipboard.GetClipboardData(win32clipboard.CF_TEXT)
-                text = py3compat.cast_unicode(text, py3compat.DEFAULT_ENCODING)
-            except (TypeError, win32clipboard.error):
-                text = None
-        finally:
-            win32clipboard.CloseClipboard()
-            return text
+def get_clipboard_text():
+    """ Try to get clipboard's text
 
-    def set_clipboard_text(wanted_data):
-        win32clipboard.OpenClipboard()
-        # win32clipboard.EmptyClipboard()
-        try:
-            win32clipboard.SetClipboardText(
-                wanted_data, win32clipboard.CF_TEXT)
-        except:
-            print(">> [WARN] Can't set clipborad's data.")
-        finally:
-            win32clipboard.CloseClipboard()
+        Returns:
+            text(str):
+                string: data from clipboard
 
-    # init
+    """
+
+    win32clipboard.OpenClipboard()
+    try:
+        text = win32clipboard.GetClipboardData(
+            win32clipboard.CF_UNICODETEXT)
+    except (TypeError, win32clipboard.error):
+        text = None
+    finally:
+        win32clipboard.CloseClipboard()
+
+    if text:
+        return text
+    else:
+        raise TypeError(
+            "Can't get clipboard's data, might not be text data.")
+
+
+def set_clipboard_text(new_text):
+    """ Try to get clipboard's text
+
+        Args:
+            new_text(str):
+                data for updating clipboard.
+
+    """
+    win32clipboard.OpenClipboard()
+    win32clipboard.EmptyClipboard()
+    try:
+        win32clipboard.SetClipboardData(
+            win32clipboard.CF_UNICODETEXT, new_text)
+    except:
+        logging.warn(
+            "Sorry we can't SET your clipborad.")
+        raise TypeError("Sorry we can't RESET your clipborad.")
+    finally:
+        win32clipboard.CloseClipboard()
+
+
+def smartcopy_runner(modifytext_func, **modifytext_kwargs):
+    """ Loops in spying clipboard's action, then modify
+
+        Args:
+            modifytext_func (func):  The middleware function to modify your text.
+
+    """
     try:
         last = get_clipboard_text()
-    except:
-        last = None
+    except TypeError:
+        last = ""
 
-    while 1:
-        current = get_clipboard_text()
-        if current and last != current:
-            t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-            print(
-                ">> [INFO][{}] Smartcopy is modifying your clipborad's data.".format(t))
+    while True:
+        try:
+            current = get_clipboard_text()
+        except TypeError:
+            current = None
+
+        if current and current != last:
+            logging.info(
+                "New clipboard data detected.")
             try:
-                modified = modify_func(current)
-                print('success modified')
+                modified = modifytext_func(current, **modifytext_kwargs)
+                logging.info(
+                    "Successfully modified your clipborad's data.")
             except:
                 modified = current
-                print('failed to modify')
-            finally:
-                set_clipboard_text(modified)
-                last = modified
+                logging.info("Failed to modify your clipborad's data.")
+
+            if modified != current:
+                try:
+                    set_clipboard_text(modified)
+                    _status = True
+                except TypeError:
+                    _status = False
+
+                if _status:
+                    last = modified
+                else:
+                    last = current
+
+            else:
+                last = current
 
         time.sleep(0.1)
 
 
+def opening_msg():
+    print("\n===================================================\n")
+    print(
+        """ WELCOME TO SMARTCOPY v1.1.0 ^_^
+    -------------------------------
+    > Author: github@kbjiyu
+    > Github: https://goo.gl/Pnkazc
+    ------------------------------- """)
+    print("\n===================================================")
+
+
+def input_question():
+    while True:
+        # questions for params
+        try:
+            modify_mode_num = int(input(
+                "Please select the 'modify mode'(default is 1): \n  1 basic\n  2 list-mark\n  Your Selection >> "))
+        except ValueError:
+            print("Warning! Please enter with the limited number.")
+        else:
+            break
+
+    while True:
+        try:
+            print("===================================================")
+            keep_emoji_num = int(input(
+                "Please select the 'keep_emoji' option(default is 1): \n  1 keep it!\n  2 remove it\n  Your Selection >> "))
+        except ValueError:
+            print("Warning! Please enter with the limited number.")
+        else:
+            break
+
+    if modify_mode_num == 2:
+        modify_mode = 'LIST-MARK'
+    else:
+        modify_mode = 'BASIC'
+
+    if keep_emoji_num == 1:
+        keep_emoji = True
+    else:
+        keep_emoji = False
+
+    print("===================================================")
+    print("> modify_mode: {}\n> keep_emoji: {}".format(modify_mode, keep_emoji))
+    print("===================================================")
+
+    return modify_mode, keep_emoji
+
+
+def unexpected_exit_msg():
+    logging.error(
+        "Something not excepted happened, please try again, or report it!")
+    logging.info(
+        """ \n
+            -------------------------------
+            > Author: github@kbjiyu
+            > Github: https://goo.gl/Pnkazc
+            ------------------------------- \n
+        """
+    )
+    logging.info(">> Press any key to exit.")
+
+
 if __name__ == '__main__':
+
+    opening_msg()
+    modify_mode, keep_emoji = input_question()
+
     try:
-        start = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        print(">> [INFO][{}] WELCOME TO SMARTCOPY v1.0.0 ^_^".format(start))
-        print(">> [INFO][{}] Smartcopy is running!".format(start))
-        spy_on_clipboard(split_sentence_by_br)
+        logging.info("Smartcopy is running!")
+        smartcopy_runner(
+            modify_en_text, modify_mode=modify_mode, keep_emoji=keep_emoji)
     except KeyboardInterrupt:
-        end = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        print(">> [INFO][{}] Smartcopy is Exiting. {}".format(end, sys.stderr))
+        logging.info("Smartcopy is Exiting. Wish you a nice day^^~")
         sys.exit(0)
+    except:
+        unexpected_exit_msg()
+        input()
