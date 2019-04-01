@@ -5,15 +5,53 @@
 ## 關於 SMARTCOPY 🚀👑🎈
 
 **您。是否厭煩了"要翻譯英文文獻時總要『複製貼上調整段落.複製貼上調整段落.複製貼上調整段落嗎!!!?**
+
+您。是否厭煩了。 翻譯英文文獻時，總要...
+
+**『複製貼上調整段落複製貼上調整段落複製貼上調整段落 複製貼上調整段落複製貼上調整段落複製貼上調整段落 複製貼上調整段落複製貼上調整段落複製貼上調整段落 複製貼上調整段落複製貼上調整段落複製貼上調整段落』嗎!!!?**
+
 > **調整段落這種煩人小事，就讓 SMARTCOPY 來為你搞定吧!!**
+
+- Smartcopy會自動將英文文章以"句子分開呈現"! 
+  - 加速閱讀易讀性 
+  - 提高翻譯正確性
+  - 方便作摘要筆記
+
+- 範例
+  - [原文章]
+    <pre> Coffee is a super drink.It has something in it that helps wake people up.There are many ways to make coffee.In some places, such as Africa, the dark coffee beans are bolied in water with suger.</pre>
+
+  - [smartcopy開啟後] 
+    <pre>- Coffee is a super drink. 
+    - It has something in it that helps wake people up.      
+    - There are many ways to make coffee.
+    - In some places, such as Africa, the dark coffee beans are bolied in water with suger.</pre>
 
 ### 執行只要三個步驟！ 🍻
 
 ![introexe](/introexe.gif)
 
-1. 下載`smartcopy.rar`。
-2. 執行`smartcopy.exe`。
-3. 快樂享受 **Smartcopy**。
+#### 下載說明： 
+
+1. 連至**[smart-copy-from-en-pdf-exe github](https://goo.gl/Pnkazc)頁面**。 
+2. 點選 **右側綠色 Clone or download按鈕**。
+3. 選擇 **Download Zip**下載。
+4. 解壓縮**smart-copy-from-en-pdf-exe-master.zip**。
+
+#### 使用說明： 
+
+1. 執行 **smartcopy.exe**。 
+2. 於畫面中 **輸入數字後 按下enter** 以選擇模式： 
+
+   - 請選擇文章輸出模式 
+     - 1 基本 basic 
+     - 2 列表式 list-mark
+   - 請選擇是否清洗文章內emoji符號 
+     - 1 保存 
+     - 2 清洗 
+3. `複製(ctrl+c)` 未分句落的英文文章。 
+4. `貼上(ctrl+v)` 貼至任一地方，查看結果!
+
 
 ### 若以Python執行或自訂開發 🚩
 
