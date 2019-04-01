@@ -28,7 +28,7 @@
 
 #### 下載說明： 
 
-1. 連至**[smart-copy-from-en-pdf-exe github](https://goo.gl/Pnkazc)頁面**。 
+1. 連至[smart-copy-from-en-pdf-exe github](https://goo.gl/Pnkazc)頁面。 
 2. 點選 **右側綠色 Clone or download按鈕**。
 3. 選擇 **Download Zip**下載。
 4. 解壓縮**smart-copy-from-en-pdf-exe-master.zip**。
