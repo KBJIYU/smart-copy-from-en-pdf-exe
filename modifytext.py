@@ -50,6 +50,8 @@ def split_text_to_sentences_en(text):
 
     """
 
+    text = text.replace(" . . . ","...") #replace LaTex ellipses with original ellipses
+    
     sents = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', text)
 
     return sents
