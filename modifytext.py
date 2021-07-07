@@ -50,9 +50,19 @@ def split_text_to_sentences_en(text):
 
     """
 
-    text = text.replace(" . . . ","...") #replace LaTex ellipses with original ellipses
+    text = text.replace(" . . . ","...") # replace LaTex ellipses with original ellipses
     
-    sents = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', text)
+    
+    sents = re.split(r'(?<!\w\.\w.)(?<=\w[\.\?\!]|[\.\?\!][\"\”\’\'])\s(?!\[\d)', text, flags=re.MULTILINE)
+    """
+    match target:                               <space>
+
+    #1. (?<!\w\.\w.):                           exclude <word>\.<word><space>
+    #2. (?<=\w[\.\?\!]|[\.\?\!][\"\”\’\']):     include <word>[.|?|!]<space> or [.|?|!][\"\”\’\']<space>
+    #3. (?!\[\d):                               exclude <space>\[<digit>
+
+    Rule #3 is to prevent the program from splitting citations like "et al. [11]"
+    """
 
     return sents
 
