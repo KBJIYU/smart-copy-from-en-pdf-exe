@@ -58,8 +58,8 @@ def set_clipboard_text(new_text):
             win32clipboard.CF_UNICODETEXT, new_text)
     except:
         logging.warn(
-            "Sorry we can't SET your clipborad.")
-        raise TypeError("Sorry we can't RESET your clipborad.")
+            "Sorry we can't SET your clipboard.")
+        raise TypeError("Sorry we can't RESET your clipboard.")
     finally:
         win32clipboard.CloseClipboard()
 
@@ -88,10 +88,10 @@ def smartcopy_runner(modifytext_func, **modifytext_kwargs):
             try:
                 modified = modifytext_func(current, **modifytext_kwargs)
                 logging.info(
-                    "Successfully modified your clipborad's data.")
+                    "Successfully modified your clipboard's data.")
             except:
                 modified = current
-                logging.info("Failed to modify your clipborad's data.")
+                logging.info("Failed to modify your clipboard's data.")
 
             if modified != current:
                 try:
