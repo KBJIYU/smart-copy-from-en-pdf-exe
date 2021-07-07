@@ -1,0 +1,13 @@
+3 Sections of the thesis 4
+3.1 Title page . . . . . . . . 5
+3.2 Dedication . . . . . . . . 7
+3.3 Abstract . . . . . . . . . 7
+3.4 Table of contents and
+other lists . . . . . . . . 9
+3.5 Table of symbols and
+notation . . . . . . . . . 10
+3.6 Appendices . . . . . . 10
+3.7 Index . . . . . . . . . . . 11
+3.8 Bibliography . . . . . . 12
+4 Objects 13
+4.1 Figures . . . . . . . . . 13s
