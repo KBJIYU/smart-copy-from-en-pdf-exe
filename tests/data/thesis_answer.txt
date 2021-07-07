@@ -1,0 +1,28 @@
+Now let’s come back again to diversification.
+
+In order to understand how to diversify a portfolio we should understand the risk.
+
+According to Ibbotson et al. [11] risk has two components, systematic and unsystematic.
+
+Where market forces affect all assets simultaneously in some systematic manner it generates Systematic risk or what so called, undiversifiable risk.
+
+Examples are Bull markets, Bear markets, wars, changes in the level of inflation.
+
+The other component of risk is unsystematic one, or so called diversifiable risk.
+
+These are idiosyncratic events that are statistically independent from the more widespread forces that generate undiversifiable risk.
+
+The examples of a diversifiable risk are Acts of God (Hurricane or flood), inventions, management errors, lawsuits and good or bad news affecting one firm.
+
+As defined above, Total risk of a portfolio is the result of summation of systematic and unsystematic risks.
+
+On average, the total risk of a diversified portfolio tends to diminish as more randomly selected common stocks are added to the portfolio.
+
+But, when more than about three dozen random stocks are combined, it is impossible to reduce a randomly selected portfolio’s risk below the level of undiversifiable risk that exists in the market.
+
+Figure 4 shows the graphical interpretation of this.
+
+The straight line separates the systematic risk from unsystematic one, the systematic or undiversifiable risk lies under the straight line.
+
+
+
